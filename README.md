@@ -1,5 +1,3 @@
-Certainly! Here's a full description for configuring Docker with Zscaler on Windows:
-
 ## Configuring Docker with Zscaler on Windows
 
 This guide provides step-by-step instructions on how to configure Docker with Zscaler on Windows. By following these instructions, you will be able to build and run Docker containers with Zscaler certificate support.
