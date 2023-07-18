@@ -15,17 +15,17 @@ Before you begin, ensure that you have the following prerequisites:
 
 1. Create folder with name zscaler.
 2. Create file with name.
-   ```shell
-   docker.env
-   ```
+```shell
+docker.env
+```
 
-   ```
-   BUILD_ENV=production
-   ```
-   or
-   ```
-   BUILD_ENV=development
-   ```
+```
+BUILD_ENV=production
+```
+or
+```
+BUILD_ENV=development
+```
 
 3. Create file with name.
 ```shell
@@ -96,34 +96,37 @@ ENTRYPOINT ["dotnet", "WebRequests.dll"]
 # Copy the published project files from the builder stage
 COPY --from=builder /out/ .
 ```
+6. Create `src` folder
 
-6. Save and close the `Dockerfile`.
+7. create `WebRequests.csproj` file into `src`
 
-7. Place the `Zscaler certificate` file in the same directory as the `Dockerfile`.
+8. Save and close the `Dockerfile`.
 
-8. Open a command prompt or PowerShell window.
+9. Place the `Zscaler certificate` file in the same directory as the `Dockerfile`.
 
-9. Navigate to the directory where your Docker project and `Dockerfile` are located.
+10. Open a command prompt or PowerShell window.
 
-10. Build the Docker image by running the following command:
+11. Navigate to the directory where your Docker project and `Dockerfile` are located.
+
+12. Build the Docker image by running the following command:
 
 ```shell
 docker build -t zscaler-image .
 ```
 
-11. Once the build process is complete, verify that the Docker image was successfully created by running the following command:
+13. Once the build process is complete, verify that the Docker image was successfully created by running the following command:
 
 ```shell
 docker images
 ```
 
-12. Run a Docker container based on the created image using the following command:
+14. Run a Docker container based on the created image using the following command:
 
 ```shell
 docker run -d --name zscaler-container zscaler-image
 ```
 
-13. Check if the container is running by executing the following command:
+15. Check if the container is running by executing the following command:
 
 ```shell
 docker ps
