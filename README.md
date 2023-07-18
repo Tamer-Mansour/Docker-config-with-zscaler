@@ -13,15 +13,34 @@ Before you begin, ensure that you have the following prerequisites:
 
 ### Steps
 
-1. Clone or download the repository containing your Docker project to your local machine.
+1. Create folder with name zscaler.
 
-2. Open a command prompt or PowerShell window.
+2. Create file with name.
+```shell
+docker-compose.yml
+```
+````
+version: '3.1'
+services:
+  dotnetconf19:
+    image: dockersamples/dotnetconf:19
+    build:
+      context: .
+      args:
+        - BUILD_ENV=${BUILD_ENV:-production}
+        - CERT_FILE=${CERT_FILE:-/etc/ssl/certs/ca-certificates.crt}
+    environment:
+      - BUILD_ENV=${BUILD_ENV:-production}
+      - CERT_FILE=${CERT_FILE:-/etc/ssl/certs/ca-certificates.crt}
 
-3. Navigate to the directory where your Docker project is located.
+````
 
-4. Create a new file called `Dockerfile` in the project directory.
 
-5. Open the `Dockerfile` using a text editor and add the following content:
+4. Navigate to the directory where your Docker project is located.
+
+5. Create a new file called `Dockerfile` in the project directory.
+
+6. Open the `Dockerfile` using a text editor and add the following content:
 
 ```Dockerfile
 # Use the base .NET Core SDK 3.0.100-preview9 image
