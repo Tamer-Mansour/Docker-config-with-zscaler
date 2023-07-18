@@ -9,7 +9,7 @@ This guide provides step-by-step instructions on how to configure Docker with Zs
 Before you begin, ensure that you have the following prerequisites:
 
 - Docker installed on your Windows machine
-- Zscaler certificate file (ZscalerRootCertificate-2048-SHA256.crt)
+- Zscaler certificate file <name>
 
 ### Steps
 
@@ -36,11 +36,23 @@ services:
 ````
 
 
-4. Navigate to the directory where your Docker project is located.
+3. Create file with name.
+   ```shell
+   docker.env
+   ```
 
-5. Create a new file called `Dockerfile` in the project directory.
+   ```
+   BUILD_ENV=production
+   ```
+   or
+   ```
+   BUILD_ENV=development
+   ```
+   
 
-6. Open the `Dockerfile` using a text editor and add the following content:
+4. Create a new file called `Dockerfile` in the project directory.
+
+5. Open the `Dockerfile` using a text editor and add the following content:
 
 ```Dockerfile
 # Use the base .NET Core SDK 3.0.100-preview9 image
@@ -90,7 +102,7 @@ COPY --from=builder /out/ .
 
 6. Save and close the `Dockerfile`.
 
-7. Place the `ZscalerRootCertificate-2048-SHA256.crt` file in the same directory as the `Dockerfile`.
+7. Place the `Zscaler certificate` file in the same directory as the `Dockerfile`.
 
 8. Open a command prompt or PowerShell window.
 
