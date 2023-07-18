@@ -9,34 +9,12 @@ This guide provides step-by-step instructions on how to configure Docker with Zs
 Before you begin, ensure that you have the following prerequisites:
 
 - Docker installed on your Windows machine
-- Zscaler certificate file <name>
+- Zscaler certificate file `Zscaler certificate`
 
 ### Steps
 
 1. Create folder with name zscaler.
-
 2. Create file with name.
-```shell
-docker-compose.yml
-```
-````
-version: '3.1'
-services:
-  dotnetconf19:
-    image: dockersamples/dotnetconf:19
-    build:
-      context: .
-      args:
-        - BUILD_ENV=${BUILD_ENV:-production}
-        - CERT_FILE=${CERT_FILE:-/etc/ssl/certs/ca-certificates.crt}
-    environment:
-      - BUILD_ENV=${BUILD_ENV:-production}
-      - CERT_FILE=${CERT_FILE:-/etc/ssl/certs/ca-certificates.crt}
-
-````
-
-
-3. Create file with name.
    ```shell
    docker.env
    ```
@@ -48,8 +26,27 @@ services:
    ```
    BUILD_ENV=development
    ```
-   
 
+3. Create file with name.
+```shell
+docker-compose.yml
+```
+````
+version: '3.1'
+services:
+  dotnetconf19:
+    image: dockersamples/dotnetconf:19
+    build:
+      context: .
+      args:
+        - BUILD_ENV=${BUILD_ENV:-`production or development`}
+        - CERT_FILE=${CERT_FILE:-/etc/ssl/certs/ca-certificates.crt}
+    environment:
+      - BUILD_ENV=${BUILD_ENV:-`production or development`}
+      - CERT_FILE=${CERT_FILE:-/etc/ssl/certs/ca-certificates.crt}
+
+````
+   
 4. Create a new file called `Dockerfile` in the project directory.
 
 5. Open the `Dockerfile` using a text editor and add the following content:
@@ -74,19 +71,19 @@ RUN dotnet publish -c Release -o /out WebRequests.csproj
 # Use the base .NET Core Runtime 3.0.0-preview9 image for the final runtime image
 FROM mcr.microsoft.com/dotnet/core/runtime:3.0.0-preview9
 
-# Add the ZscalerRootCertificate to the container
-ADD ZscalerRootCertificate-2048-SHA256.crt /tmp/ZscalerRootCertificate-2048-SHA256.crt
+# Add the `Zscaler certificate` to the container
+ADD `Zscaler certificate` /tmp/`Zscaler certificate`
 
 # Set the BUILD_ENV variable to production
 ENV BUILD_ENV=production
 
 # Copy the certificate into the certificate directory and update
-RUN if [ "$BUILD_ENV" = "production" ]; then \
-      echo "Production environment"; \
+RUN if [ "$BUILD_ENV" = "`production or development`" ]; then \
+      echo "`production or development` environment"; \
     else \
       echo "Non-production environment: BUILD_ENV"; \
       CERT_DIR=$(openssl version -d | cut -f2 -d \")/certs ; \
-      cp /tmp/ZscalerRootCertificate-2048-SHA256.crt $CERT_DIR ; \
+      cp /tmp/`Zscaler certificate` $CERT_DIR ; \
       update-ca-certificates ; \
     fi
 
